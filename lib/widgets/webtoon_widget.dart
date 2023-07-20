@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_webtoon/screens/detail_screen.dart';
 
 class Webtoon extends StatelessWidget {
   final String title, thumb, id;
@@ -11,38 +12,52 @@ class Webtoon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          clipBehavior: Clip.hardEdge,
-          width: 250,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 15,
-                offset: const Offset(10, 10),
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(
-              15,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailScreen(
+              title: title,
+              thumb: thumb,
+              id: id,
             ),
           ),
-          child: Image.network(
-            thumb,
+        );
+      },
+      child: Column(
+        children: [
+          Container(
+            clipBehavior: Clip.hardEdge,
+            width: 250,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 15,
+                  offset: const Offset(10, 10),
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(
+                15,
+              ),
+            ),
+            child: Image.network(
+              thumb,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
+          const SizedBox(
+            height: 10,
           ),
-        ),
-      ],
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
